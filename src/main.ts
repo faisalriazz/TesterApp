@@ -1,7 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import * as csrfDSC from 'express-csrf-double-submit-cookie';
 import * as bodyParser from 'body-parser';
@@ -31,20 +30,18 @@ async function bootstrap() {
 
   // Exception Filter
 
-  // Interceptors 
+  // Interceptors
 
-  // Swagger
-  const options = new DocumentBuilder()
-    .setTitle('Gigatree API V1')
-    .setDescription('Gigatree Backend Rest API Docs')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('docs', app, document);
+  // Listen on any available port (dynamic port assignment)
+  const server = await app.listen(0);
 
-  await app.listen();
-  const url = await app.getUrl();
-  console.log(`The server is running at ${url}, Swagger URL: ${url}/docs`);
+  const address = server.address();
+  if (typeof address === 'string') {
+    console.log(`Server listening on ${address}`);
+  } else {
+    const { port, family, address: host } = address;
+    console.log(`Server listening at http://${host}:${port} (${family})`);
+  }
 }
 
 bootstrap();
