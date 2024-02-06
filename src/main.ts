@@ -42,10 +42,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
 
-  await app.listen(async () => {
-    const url = await app.getUrl();
-    console.log(`The server is running at ${url}, Swagger URL: ${url}/docs`);
-  });
+  await app.listen();
+  const url = await app.getUrl();
+  console.log(`The server is running at ${url}, Swagger URL: ${url}/docs`);
 }
 
 bootstrap();
