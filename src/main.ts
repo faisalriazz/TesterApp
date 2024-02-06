@@ -33,7 +33,7 @@ async function bootstrap() {
 
   //Interceptors 
 
-  const port = configService.get<number>('SERVER_PORT');
+ // const port = configService.get<number>('SERVER_PORT');
 
   //Swagger
   const options = new DocumentBuilder()
@@ -45,8 +45,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
 
-  await app.listen(port, async () => {
-    console.log(`The server is running on port ${port}, Swagger URL: https://adventurous-plum-dress.cyclic.app/docs`);
-  });
+  // await app.listen(port, async () => {
+  //   console.log(`The server is running on port ${port}, Swagger URL: https://adventurous-plum-dress.cyclic.app/docs`);
+  // });
 }
 bootstrap();
