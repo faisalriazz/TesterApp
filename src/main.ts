@@ -40,7 +40,6 @@ async function bootstrap() {
   .setTitle('Gigatree API V1')
   .setDescription('Gigatree Backend Rest API Docs')
   .setVersion('1.0')
-  .addBearerAuth({ in: 'header', type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
