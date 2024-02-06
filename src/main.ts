@@ -12,16 +12,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
-  //increase request body size
-  app.use(bodyParser.json({limit: '50mb'}));
-  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+  // Increase request body size
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-  //Security
+  // Security
   app.enableCors();
   app.use(cookieParser());
   app.use(csrfProtection);
 
-  //Modal Validations
+  // Modal Validations
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -29,23 +29,23 @@ async function bootstrap() {
     }),
   );
 
-  //Exception Filter
+  // Exception Filter
 
-  //Interceptors 
+  // Interceptors 
 
-  const port = process.env.PORT || configService.get<number>('SERVER_PORT') || 3000;
-
-  //Swagger
+  // Swagger
   const options = new DocumentBuilder()
-  .setTitle('Gigatree API V1')
-  .setDescription('Gigatree Backend Rest API Docs')
-  .setVersion('1.0')
-  .build();
+    .setTitle('Gigatree API V1')
+    .setDescription('Gigatree Backend Rest API Docs')
+    .setVersion('1.0')
+    .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
 
-  await app.listen(port, async () => {
-    console.log(`The server is running on port ${port}, Swagger URL: https://adventurous-plum-dress.cyclic.app/docs`);
+  await app.listen(async () => {
+    const url = await app.getUrl();
+    console.log(`The server is running at ${url}, Swagger URL: ${url}/docs`);
   });
 }
+
 bootstrap();

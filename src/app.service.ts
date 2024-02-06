@@ -4,7 +4,7 @@ import open from 'open';
 @Injectable()
 export class AppService {
   async openSwagger(): Promise<void> {
-    const url = 'http://localhost:3000/api';
+    const url = 'https://adventurous-plum-dress.cyclic.app/api';
 
     await open(url);
   }
