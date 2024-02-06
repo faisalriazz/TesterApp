@@ -46,7 +46,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(port, async () => {
-    console.log(`The server is running on port ${port}, Swagger URL: http://localhost:${port}/docs`);
+    console.log(`The server is running on port ${port}, Swagger URL: https://adventurous-plum-dress.cyclic.app/docs`);
   });
 }
 bootstrap();
